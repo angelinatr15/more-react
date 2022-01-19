@@ -1,0 +1,109 @@
+--When we learned to create an object, we first thought about what we want to model that object after. For example we would create a cat object and gave it properties a cat would have. If a cat went to the vet, what type of information would they need?
+let cat = {
+name: 'Jiggy',
+color: 'Black and White',
+age: 2
+}
+
+--In React, when we create an item component, it is the same as creating an object.  Instead of creating the object, we are showing the object using JSX.  We need to think about what properties of the cat we will show the user.  We also expect to have the cat delivered to us as a prop from the parent.
+
+const CatComponent = (props) => {
+return(
+<div>
+{props.cat.name} {props.cat.color} {props.cat.age}
+</div>
+)
+}
+
+export default CatComponent;
+
+//The above code defines the cat component ( whis is an item component).  Props is a parameter.  Parent components importing this component to use will need to pass in a prop called cat.  Since you are the one programming this app, you would know a cat has a name, color and age.  You can use properties in props.cat to show them.
+
+
+
+List Component
+List components are the parents of the item component.  It will render the item component(s) and pass in necessary props to it (we look at the item component to see what it expects).  The Cat Component expects a cat object. So if we make a CatList component, we will render some Cat components, usualy by looping through an array.
+
+
+const cats = [
+{
+name: 'Jiggy',
+color: 'Black and White',
+age: 2
+},
+{
+name: 'Roe',
+color: 'Black and White and Orange',
+age: 3
+},
+{
+name: 'Goose',
+color: 'Black and White',
+age: 4
+}
+]
+const CatList = () -> {
+return(
+<div>
+{cats.map((curentCat) => (
+<CatComponent cat = {currentCat} />
+))}
+</div>
+)
+}
+
+export default CatList;
+
+//In the above code, we loop through the cats array.  For every item, we will give it a variable named curentCat.  We can now access each item (one at a time, one per loop). In each loop, we create a CatComponent and pass the current cat as a porperty to the props object.
+
+The passed props looks like this   props = {cat : currentCat}
+
+
+React Review
+
+Scenario: Our client gives us a list of cats and wants us to show each cat's information on our website. The data looks like this:
+const cats = [
+{
+name: 'Jiggy',
+color: 'Black and White',
+age: 2
+},
+{
+name: 'Roe',
+color: 'Black and White and Orange',
+age: 3
+},
+{
+name: 'Goose',
+color: 'Black and White',
+age: 4
+}
+]
+
+Steps we should take:
+
+Create a functional component called cat. This component takes in props with a cat property.
+This component returns html to show the cat.color, cat.name, cat.age.
+
+
+Create a functional component called CatList.
+Create a state called cats with this initial value:  [
+{
+name: 'Jiggy',
+color: 'Black and White',
+age: 2
+},
+{
+name: 'Roe',
+color: 'Black and White and Orange',
+age: 3
+},
+{
+name: 'Goose',
+color: 'Black and White',
+age: 4
+}
+]
+return a div with an h3 in it. Inside h3, put the word 'Cat List' in it.
+
+Under the h3, map through the cats state and return a cat component for every item.  Each cat will take in a prop called cat.
